@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: perseus
+  profiles:
+    active: dev
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${OAUTH-GOOGLE-ID}
+            client-secret: ${OAUTH-GOOGLE-SECRET}
+            scope: profile, email
+            redirect-uri: "http://localhost:8080/login/oauth2/code/google"
+
+jwt:
+  access-time: 900000
+  refresh-time: 604800000
+  prefix: "Bearer "
+  header: "Authorization"
+  secret-key: ${JWT-SECRET-KEY}

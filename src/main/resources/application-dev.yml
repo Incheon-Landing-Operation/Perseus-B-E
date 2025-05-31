@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    username: root
+    password: kdoornega0128
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3308/perseus
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
