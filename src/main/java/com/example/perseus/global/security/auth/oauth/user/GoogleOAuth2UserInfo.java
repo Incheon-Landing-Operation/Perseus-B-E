@@ -1,4 +1,4 @@
-package com.example.perseus.global.security.auth.oauth;
+package com.example.perseus.global.security.auth.oauth.user;
 
 import java.util.Map;
 

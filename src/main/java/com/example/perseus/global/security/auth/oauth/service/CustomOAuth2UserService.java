@@ -1,8 +1,10 @@
-package com.example.perseus.global.security.auth.oauth;
+package com.example.perseus.global.security.auth.oauth.service;
 
 import com.example.perseus.domain.user.entity.SocialType;
 import com.example.perseus.domain.user.entity.User;
 import com.example.perseus.domain.user.repository.UserRepository;
+import com.example.perseus.global.security.auth.oauth.user.CustomOAuth2User;
+import com.example.perseus.global.security.auth.oauth.user.OAuthAttributes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;

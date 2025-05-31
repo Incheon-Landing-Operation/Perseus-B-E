@@ -4,16 +4,13 @@ import com.example.perseus.domain.user.entity.UserRole;
 import com.example.perseus.global.config.properties.JwtProperties;
 
 
-import com.example.perseus.global.security.auth.oauth.CustomOAuth2User;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -58,7 +55,7 @@ public class JwtProvider {
   }
 
   private String parseToken(String bearerToken) {
-    if (bearerToken.startsWith(jwtProperties.prefix())) {
+    if (bearerToken != null && bearerToken.startsWith(jwtProperties.prefix())) {
       return bearerToken.replace(jwtProperties.prefix(), "");
     }
     return null;

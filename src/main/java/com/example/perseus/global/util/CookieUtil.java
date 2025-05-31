@@ -1,8 +1,8 @@
-package com.example.perseus.global.utils;
+package com.example.perseus.global.util;
 
 import jakarta.servlet.http.Cookie;
 
-public class CookieMaker {
+public class CookieUtil {
   public static Cookie makeCookie(String key, String value) {
     Cookie cookie = new Cookie(key, value);
     cookie.setMaxAge(1800);

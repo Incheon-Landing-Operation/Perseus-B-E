@@ -1,4 +1,4 @@
-package com.example.perseus.global.security.auth.oauth;
+package com.example.perseus.global.security.auth.oauth.user;
 
 import com.example.perseus.domain.user.entity.UserRole;
 import lombok.Getter;
