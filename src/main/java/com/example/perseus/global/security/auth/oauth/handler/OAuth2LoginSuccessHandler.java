@@ -1,9 +1,13 @@
 package com.example.perseus.global.security.auth.oauth.handler;
 
+import com.example.perseus.domain.auth.dto.response.TokenResponse;
 import com.example.perseus.domain.user.entity.type.UserRole;
+import com.example.perseus.global.dto.ResponseDto;
 import com.example.perseus.global.security.auth.jwt.JwtProvider;
 import com.example.perseus.global.security.auth.oauth.user.CustomOAuth2User;
+import com.example.perseus.global.util.ApiUtil;
 import com.example.perseus.global.util.CookieUtil;
+import com.example.perseus.global.util.HttpServletResponseUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,17 +34,16 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
     String email = principal.getEmail();
     UserRole role = principal.getRole();
 
-    String accessToken = jwtProvider.createAccessToken(email, role);
-    String refreshToken = jwtProvider.createRefreshToken(email, role);
+    TokenResponse tokenSet = jwtProvider.createTokenResponse(email, role);
 
-    response.setContentType("application/json");
-    response.setCharacterEncoding("UTF-8");
+    HttpServletResponseUtil.setting(response, 202);
 
-    response.addCookie(CookieUtil.makeCookie("refresh", refreshToken));
+    response.addCookie(CookieUtil.makeCookie("refresh", tokenSet.refreshToken()));
 
     Map<String, String> body = new ConcurrentHashMap<>();
-    body.put("accessToken", accessToken);
+    body.put("accessToken", tokenSet.accessToken());
     body.put("status", role == UserRole.GUEST ? "GUEST" : "USER");
-    response.getWriter().write(new ObjectMapper().writeValueAsString(body));
+    ResponseDto<Map<String, String>> responseDto = ApiUtil.success(200, "소셜 로그인 성공", body);
+    response.getWriter().write(new ObjectMapper().writeValueAsString(responseDto));
   }
 }

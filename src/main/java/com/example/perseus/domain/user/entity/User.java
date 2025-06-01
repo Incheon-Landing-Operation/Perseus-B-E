@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,14 +37,6 @@ public class User {
   @Enumerated(EnumType.STRING)
   private Gender gender;
   private Boolean usedCbt;
-
-  public String getEmail() {
-    return email;
-  }
-
-  public UserRole getRole() {
-    return role;
-  }
 
   public void addInfo(AdditionalInfoRequest additionalInfoRequest) {
     this.nickName = additionalInfoRequest.nickName();

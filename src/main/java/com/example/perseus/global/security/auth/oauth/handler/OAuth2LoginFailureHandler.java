@@ -1,5 +1,9 @@
 package com.example.perseus.global.security.auth.oauth.handler;
 
+import com.example.perseus.global.dto.ResponseDto;
+import com.example.perseus.global.util.ApiUtil;
+import com.example.perseus.global.util.HttpServletResponseUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,14 +13,17 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Map;
 
 @Slf4j
 @Service
 public class OAuth2LoginFailureHandler implements AuthenticationFailureHandler {
   @Override
   public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-    response.getWriter().write("소셜 로그인 실패!!");
+    HttpServletResponseUtil.setting(response, 400);
+
+    ResponseDto<Void> responseDto = ApiUtil.fail(400, "소셜 로그인 실패");
+    response.getWriter().write(new ObjectMapper().writeValueAsString(responseDto));
     log.error("소셜 로그인 실패!!");
     log.error("에러 메시지 : " + exception.getMessage());
   }
