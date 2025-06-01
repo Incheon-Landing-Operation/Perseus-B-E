@@ -13,6 +13,10 @@ spring:
             client-secret: ${OAUTH-GOOGLE-SECRET}
             scope: profile, email
             redirect-uri: "http://localhost:8080/login/oauth2/code/google"
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
 jwt:
   access-time: 900000

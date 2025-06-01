@@ -1,6 +1,6 @@
 package com.example.perseus.global.security.auth.oauth.service;
 
-import com.example.perseus.domain.user.entity.SocialType;
+import com.example.perseus.domain.user.entity.type.SocialType;
 import com.example.perseus.domain.user.entity.User;
 import com.example.perseus.domain.user.repository.UserRepository;
 import com.example.perseus.global.security.auth.oauth.user.CustomOAuth2User;
@@ -21,7 +21,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
   private final UserRepository userRepository;
-  private static final String GOOGLE = "google";
 
   @Override
   public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {

@@ -1,5 +1,7 @@
 package com.example.perseus.domain.user.entity;
 
+import com.example.perseus.domain.user.entity.type.SocialType;
+import com.example.perseus.domain.user.entity.type.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +12,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +22,6 @@ public class User {
   private SocialType socialType;
   private String socialId;
   private String imageUrl;
-
   @Enumerated(EnumType.STRING)
   private UserRole role;
   private Boolean visited_counseling_center;
@@ -30,4 +30,13 @@ public class User {
 
   private char sex;
   private Boolean used_cbt;
+
+  public String getEmail() {
+    return email;
+  }
+
+  public UserRole getRole() {
+    return role;
+  }
+
 }

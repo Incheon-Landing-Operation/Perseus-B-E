@@ -9,17 +9,17 @@ public class GoogleOAuth2UserInfo extends OAuth2UserInfo {
   }
 
   @Override
-  String getId() {
+  public String getId() {
     return (String) attributes.get("sub");
   }
 
   @Override
-  String getNickName() {
+  public String getNickName() {
     return (String) attributes.get("name");
   }
 
   @Override
-  String getImageUrl() {
+  public String getImageUrl() {
     return (String) attributes.get("picture");
   }
 }
