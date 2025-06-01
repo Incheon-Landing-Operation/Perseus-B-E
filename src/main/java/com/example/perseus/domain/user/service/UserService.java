@@ -26,4 +26,16 @@ public class UserService {
     UserResponse userResponse = userMapper.toUserResponse(user);
     return userResponse;
   }
+
+  @Transactional
+  public User login(String email, String name, String imageUrl) {
+    User user = userRepository.findByEmail(email)
+            .orElseGet(() -> this.signUp(email, name, imageUrl));
+    return user;
+  }
+  private User signUp(String email, String name, String imageUrl) {
+    User user = userMapper.toUser(email, name, imageUrl);
+    userRepository.save(user);
+    return user;
+  }
 }

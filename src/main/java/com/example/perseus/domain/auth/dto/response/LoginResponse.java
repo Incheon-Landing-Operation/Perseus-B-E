@@ -1,4 +1,4 @@
-package com.example.perseus.domain.user.dto.response;
+package com.example.perseus.domain.auth.dto.response;
 
 import com.example.perseus.domain.user.entity.type.UserRole;
 

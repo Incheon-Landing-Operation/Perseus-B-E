@@ -1,4 +1,4 @@
-package com.example.perseus.global.security.auth.jwt;
+package com.example.perseus.global.security.jwt;
 
 import com.example.perseus.domain.auth.dto.response.TokenResponse;
 import com.example.perseus.domain.auth.entity.RefreshToken;

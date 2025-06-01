@@ -1,7 +1,7 @@
-package com.example.perseus.domain.user.dto.request;
+package com.example.perseus.domain.auth.dto.request;
 
 public record LoginRequest (
-        String authorizationCode
+        String token
 ) {
 
 }
