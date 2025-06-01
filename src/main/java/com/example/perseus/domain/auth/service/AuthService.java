@@ -28,4 +28,7 @@ public class AuthService {
     return tokenResponse;
   }
 
+  public void logout(final String token) {
+    refreshTokenRepository.deleteById(token);
+  }
 }

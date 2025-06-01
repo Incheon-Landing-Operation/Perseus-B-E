@@ -25,4 +25,12 @@ public class AuthController {
   }
 
   // logout
+  @PostMapping("/logout")
+  public ResponseEntity<ResponseDto<Void>> logout(@Valid @RequestBody final RefreshTokenRequest refreshTokenRequest) {
+    authService.logout(refreshTokenRequest.refreshToken());
+    ResponseDto<Void> responseDto = ApiUtil.success(200, "로그아웃 성공", null);
+    return ResponseEntity.ok(responseDto);
+  }
+
+
 }
