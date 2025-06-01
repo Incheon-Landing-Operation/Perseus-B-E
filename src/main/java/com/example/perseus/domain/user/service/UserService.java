@@ -16,5 +16,6 @@ public class UserService {
   @Transactional
   public void addAdditionalInfo(final AdditionalInfoRequest additionalInfoRequest, User user) {
     user.addInfo(additionalInfoRequest);
+    userRepository.save(user);
   }
 }
