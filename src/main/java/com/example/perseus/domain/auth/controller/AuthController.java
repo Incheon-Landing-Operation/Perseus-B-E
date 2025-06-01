@@ -20,7 +20,7 @@ public class AuthController {
   @PostMapping("/reissue")
   public ResponseEntity<ResponseDto<TokenResponse>> reissue(@Valid @RequestBody final RefreshTokenRequest refreshTokenRequest) {
     TokenResponse tokenResponse = authService.reissue(refreshTokenRequest.refreshToken());
-    ResponseDto<TokenResponse> responseDto = ApiUtil.responseDto(200, "재발급 성공", tokenResponse);
+    ResponseDto<TokenResponse> responseDto = ApiUtil.success(200, "재발급 성공", tokenResponse);
     return ResponseEntity.ok(responseDto);
   }
 
