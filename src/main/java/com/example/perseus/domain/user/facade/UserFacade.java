@@ -5,7 +5,6 @@ import com.example.perseus.domain.user.exception.NotFoundUserException;
 import com.example.perseus.domain.user.repository.UserRepository;
 import com.example.perseus.global.util.AuthenticationUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service

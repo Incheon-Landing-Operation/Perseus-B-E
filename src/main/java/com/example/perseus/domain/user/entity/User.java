@@ -53,4 +53,8 @@ public class User {
     this.hasCounselingExperience = additionalInfoRequest.hasCounselingExperience();
     this.usedCbt = additionalInfoRequest.usedCbt();
   }
+
+  public void sign() {
+    this.role = UserRole.USER;
+  }
 }

@@ -13,9 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserService {
   private final UserRepository userRepository;
+
   @Transactional
-  public void addAdditionalInfo(final AdditionalInfoRequest additionalInfoRequest, User user) {
+  public void addAdditionalInfo(final AdditionalInfoRequest additionalInfoRequest, final User user) {
     user.addInfo(additionalInfoRequest);
+    user.sign();
     userRepository.save(user);
   }
 }
