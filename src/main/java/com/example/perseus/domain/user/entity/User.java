@@ -1,5 +1,8 @@
 package com.example.perseus.domain.user.entity;
 
+import com.example.perseus.domain.user.dto.request.AdditionalInfoRequest;
+import com.example.perseus.domain.user.entity.type.Gender;
+import com.example.perseus.domain.user.entity.type.Mbti;
 import com.example.perseus.domain.user.entity.type.SocialType;
 import com.example.perseus.domain.user.entity.type.UserRole;
 import jakarta.persistence.*;
@@ -18,18 +21,21 @@ public class User {
   private Long userId;
   private String name;
   private String email;
+  private String nickName;
   @Enumerated(EnumType.STRING)
   private SocialType socialType;
   private String socialId;
   private String imageUrl;
   @Enumerated(EnumType.STRING)
   private UserRole role;
-  private Boolean visited_counseling_center;
-  private String mbti;
+  private Boolean hasCounselingExperience;
+  @Enumerated(EnumType.STRING)
+  private Mbti mbti;
   private int age;
 
-  private char sex;
-  private Boolean used_cbt;
+  @Enumerated(EnumType.STRING)
+  private Gender gender;
+  private Boolean usedCbt;
 
   public String getEmail() {
     return email;
@@ -39,4 +45,12 @@ public class User {
     return role;
   }
 
+  public void addInfo(AdditionalInfoRequest additionalInfoRequest) {
+    this.nickName = additionalInfoRequest.nickName();
+    this.age = additionalInfoRequest.age();
+    this.gender = additionalInfoRequest.gender();
+    this.mbti = additionalInfoRequest.mbti();
+    this.hasCounselingExperience = additionalInfoRequest.hasCounselingExperience();
+    this.usedCbt = additionalInfoRequest.usedCbt();
+  }
 }

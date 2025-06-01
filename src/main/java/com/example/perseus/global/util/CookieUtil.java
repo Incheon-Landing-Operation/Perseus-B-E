@@ -3,7 +3,7 @@ package com.example.perseus.global.util;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 
-public class CookieUtil {
+public final class CookieUtil {
   public static Cookie makeCookie(final String key, final String value) {
     Cookie cookie = new Cookie(key, value);
     cookie.setMaxAge(1800);
