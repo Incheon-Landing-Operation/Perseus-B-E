@@ -1,6 +1,6 @@
 package com.example.perseus.global.security.auth.oauth.handler;
 
-import com.example.perseus.domain.user.entity.UserRole;
+import com.example.perseus.domain.user.entity.type.UserRole;
 import com.example.perseus.global.security.auth.jwt.JwtProvider;
 import com.example.perseus.global.security.auth.oauth.user.CustomOAuth2User;
 import com.example.perseus.global.util.CookieUtil;

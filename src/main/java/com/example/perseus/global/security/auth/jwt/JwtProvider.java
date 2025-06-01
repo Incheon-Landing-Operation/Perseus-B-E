@@ -1,6 +1,9 @@
 package com.example.perseus.global.security.auth.jwt;
 
-import com.example.perseus.domain.user.entity.UserRole;
+import com.example.perseus.domain.auth.dto.response.TokenResponse;
+import com.example.perseus.domain.auth.entity.RefreshToken;
+import com.example.perseus.domain.auth.repository.RefreshTokenRepository;
+import com.example.perseus.domain.user.entity.type.UserRole;
 import com.example.perseus.global.config.properties.JwtProperties;
 
 
@@ -10,6 +13,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
+import org.antlr.v4.runtime.Token;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,17 +31,27 @@ public class JwtProvider {
   private final static String ACCESS_TOKEN = "ACCESS_TOKEN";
   private final static String REFRESH_TOKEN = "REFRESH_TOKEN";
 
-  public String createAccessToken(String email, UserRole role) {
+  private final RefreshTokenRepository refreshTokenRepository;
+
+  public TokenResponse createTokenResponse(String email, UserRole role) {
+    String accessToken = createAccessToken(email, role);
+    String refreshToken = createRefreshToken(email, role);
+    return new TokenResponse(accessToken, refreshToken);
+  }
+
+  public String createAccessToken(final String email, final UserRole role) {
     return createToken(email, ACCESS_TOKEN, role, jwtProperties.accessTime());
   }
 
-  public String createRefreshToken(String email, UserRole role) {
+  public String createRefreshToken(final String email, final UserRole role) {
     String token = createToken(email, REFRESH_TOKEN, role, jwtProperties.refreshTime());
-    // reids -> token 저장
+    // redis -> token 저장
+    RefreshToken refreshToken = new RefreshToken(token, email, role);
+    refreshTokenRepository.save(refreshToken);
     return token;
   }
 
-  private String createToken(String email, String type, UserRole role, Long time) {
+  private String createToken(final String email, final String type, final UserRole role, final Long time) {
     Date now = new Date();
     return Jwts.builder()
             .signWith(SignatureAlgorithm.HS256, jwtProperties.secretKey())
@@ -49,19 +63,19 @@ public class JwtProvider {
             .compact();
   }
 
-  public String resolveToken(HttpServletRequest request) {
+  public String resolveToken(final HttpServletRequest request) {
     String bearer = request.getHeader(jwtProperties.header());
     return parseToken(bearer);
   }
 
-  private String parseToken(String bearerToken) {
+  private String parseToken(final String bearerToken) {
     if (bearerToken != null && bearerToken.startsWith(jwtProperties.prefix())) {
       return bearerToken.replace(jwtProperties.prefix(), "");
     }
     return null;
   }
 
-  public UsernamePasswordAuthenticationToken authorization(String token) {
+  public UsernamePasswordAuthenticationToken authorization(final String token) {
     Claims claims = parseClaim(token);
     String email = claims.getSubject();
 
@@ -77,11 +91,11 @@ public class JwtProvider {
 
   }
 
-  private Claims parseClaim(String token) {
+  private Claims parseClaim(final String token) {
     return Jwts.parserBuilder()
             .setSigningKey(jwtProperties.secretKey())
             .build()
-            .parseClaimsJwt(token)
+            .parseClaimsJws(token)
             .getBody();
   }
 

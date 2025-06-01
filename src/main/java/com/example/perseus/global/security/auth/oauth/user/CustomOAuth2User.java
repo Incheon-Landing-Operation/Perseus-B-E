@@ -1,6 +1,6 @@
 package com.example.perseus.global.security.auth.oauth.user;
 
-import com.example.perseus.domain.user.entity.UserRole;
+import com.example.perseus.domain.user.entity.type.UserRole;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;

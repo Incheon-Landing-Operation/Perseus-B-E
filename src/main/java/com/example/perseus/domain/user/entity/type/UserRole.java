@@ -1,4 +1,4 @@
-package com.example.perseus.domain.user.entity;
+package com.example.perseus.domain.user.entity.type;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

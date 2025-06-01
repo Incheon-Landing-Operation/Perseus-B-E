@@ -1,8 +1,8 @@
 package com.example.perseus.global.security.auth.oauth.user;
 
-import com.example.perseus.domain.user.entity.SocialType;
+import com.example.perseus.domain.user.entity.type.SocialType;
 import com.example.perseus.domain.user.entity.User;
-import com.example.perseus.domain.user.entity.UserRole;
+import com.example.perseus.domain.user.entity.type.UserRole;
 import lombok.Builder;
 import lombok.Getter;
 
