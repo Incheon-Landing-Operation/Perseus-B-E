@@ -38,4 +38,7 @@ public class ConstellationService {
     constellationRepository.saveConstellationList(constellationList);
   }
 
+  public List<Constellation> nearByLatAndLng(double lat, double lng) {
+    return constellationRepository.findAllWithinDistance(lat, lng, 1.0);
+  }
 }

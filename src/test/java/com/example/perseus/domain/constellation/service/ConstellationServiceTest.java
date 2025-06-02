@@ -61,10 +61,6 @@ class ConstellationServiceTest {
         when(fact2.getFactId()).thenReturn(2L);
         when(fact3.getFactId()).thenReturn(3L);
 
-        when(fact1.getWriter()).thenReturn(user);
-        when(fact2.getWriter()).thenReturn(user);
-        when(fact3.getWriter()).thenReturn(user);
-
         // Create test constellations
         constellation1 = mock(Constellation.class);
         constellation2 = mock(Constellation.class);
