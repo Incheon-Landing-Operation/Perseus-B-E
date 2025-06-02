@@ -19,11 +19,6 @@ public class UserMapper {
   }
 
   public User toUser(String email, String name, String imageUrl) {
-    return User.builder()
-            .email(email)
-            .name(name)
-            .imageUrl(imageUrl)
-            .role(UserRole.GUEST)
-            .build();
+    return User.of(email, name, imageUrl);
   }
 }

@@ -33,6 +33,15 @@ public class User {
   private Gender gender;
   private Boolean usedCbt;
 
+  public static User of(String email, String name, String imageUrl) {
+    return User.builder()
+            .email(email)
+            .name(name)
+            .imageUrl(imageUrl)
+            .role(UserRole.GUEST)
+            .build();
+  }
+
   public void addInfo(AdditionalInfoRequest additionalInfoRequest) {
     this.nickName = additionalInfoRequest.nickName();
     this.age = additionalInfoRequest.age();
