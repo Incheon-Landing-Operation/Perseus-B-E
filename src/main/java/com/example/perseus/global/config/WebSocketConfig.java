@@ -15,6 +15,6 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
   @Override
   public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-    registry.addHandler(constellationLocationHandler, "/ws/location").setAllowedOrigins("*");
+    registry.addHandler(constellationLocationHandler, "/constellation/location").setAllowedOrigins("*");
   }
 }
