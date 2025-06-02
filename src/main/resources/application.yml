@@ -4,15 +4,6 @@ spring:
   profiles:
     active: dev
 
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: ${OAUTH-GOOGLE-ID}
-            client-secret: ${OAUTH-GOOGLE-SECRET}
-            scope: profile, email
-            redirect-uri: "http://localhost:8080/login/oauth2/code/google"
   data:
     redis:
       host: localhost
@@ -24,3 +15,7 @@ jwt:
   prefix: "Bearer "
   header: "Authorization"
   secret-key: ${JWT-SECRET-KEY}
+
+auth:
+  client-id : ${AUTH-CLIENT-ID}
+  redirect-uri : "http://localhost:8080"

@@ -1,12 +1,16 @@
 package com.example.perseus.domain.auth.controller;
 
-import com.example.perseus.domain.auth.dto.request.RefreshTokenRequest;
 import com.example.perseus.domain.auth.dto.response.AccessToken;
+import com.example.perseus.domain.auth.dto.response.LoginUrl;
 import com.example.perseus.domain.auth.dto.response.TokenResponse;
 import com.example.perseus.domain.auth.service.AuthService;
+import com.example.perseus.domain.auth.dto.request.LoginRequest;
+import com.example.perseus.domain.auth.dto.response.LoginResponse;
+import com.example.perseus.domain.auth.service.GoogleAuthLinkUseCase;
 import com.example.perseus.global.dto.ResponseDto;
 import com.example.perseus.global.util.ApiUtil;
 import com.example.perseus.global.util.CookieUtil;
+import com.example.perseus.global.util.HttpServletResponseUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -19,6 +23,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value="/auth")
 public class AuthController {
   private final AuthService authService;
+  private final GoogleAuthLinkUseCase googleAuthLinkUseCase;
+
+
+  @GetMapping("/google/url")
+  public ResponseEntity<ResponseDto<LoginUrl>> getGoogleUrl() {
+    LoginUrl loginUrl = googleAuthLinkUseCase.getUrl();
+    ResponseDto<LoginUrl> responseDto = ApiUtil.success(200, "구글 로그인 url 조회", loginUrl);
+    return ResponseEntity.ok(responseDto);
+  }
+
+  @PostMapping("/google/login")
+  public ResponseEntity<ResponseDto<LoginResponse.WithOutRefreshToken>> login(@Valid @RequestBody final LoginRequest loginRequest, final HttpServletResponse response) {
+    HttpServletResponseUtil.setting(response, 200);
+    LoginResponse loginResponse = authService.login(loginRequest.token());
+    response.addCookie(CookieUtil.makeCookie("refreshToken", loginResponse.RefreshToken()));
+    ResponseDto<LoginResponse.WithOutRefreshToken> responseDto = ApiUtil.success(200, "로그인 성공", loginResponse.withoutRefreshToken());
+    return ResponseEntity.ok(responseDto);
+  }
 
   // reissue
   @GetMapping("/reissue")

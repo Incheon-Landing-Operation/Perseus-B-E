@@ -1,11 +1,9 @@
-package com.insert.ioj.global.feign.auth.res;
+package com.example.perseus.global.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+public record GoogleInformationResponse (
+        String email,
+        String name,
+        String imageUrl
+) {
 
-@Getter
-@NoArgsConstructor
-public class GoogleInformationResponse {
-  private String email;
-  private String name;
 }

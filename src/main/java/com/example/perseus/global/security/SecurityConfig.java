@@ -1,10 +1,7 @@
 package com.example.perseus.global.security;
 
 
-import com.example.perseus.global.security.auth.jwt.JwtFilter;
-import com.example.perseus.global.security.auth.oauth.handler.OAuth2LoginFailureHandler;
-import com.example.perseus.global.security.auth.oauth.service.CustomOAuth2UserService;
-import com.example.perseus.global.security.auth.oauth.handler.OAuth2LoginSuccessHandler;
+import com.example.perseus.global.security.jwt.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,11 +14,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
-  private final CustomOAuth2UserService customOAuth2UserService;
-  private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
-  private final OAuth2LoginFailureHandler oAuth2LoginFailureHandler;
-
   private final JwtFilter jwtFilter;
+
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
     http
@@ -32,13 +26,6 @@ public class SecurityConfig {
                     .anyRequest().permitAll()
             );
 
-
-    http
-            .oauth2Login(oauth -> oauth
-                    .userInfoEndpoint(user -> user.userService(customOAuth2UserService))
-                    .successHandler(oAuth2LoginSuccessHandler)
-                    .failureHandler(oAuth2LoginFailureHandler)
-            );
 
     http
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

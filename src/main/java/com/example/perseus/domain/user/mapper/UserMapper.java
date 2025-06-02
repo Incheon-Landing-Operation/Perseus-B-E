@@ -2,6 +2,7 @@ package com.example.perseus.domain.user.mapper;
 
 import com.example.perseus.domain.user.dto.response.UserResponse;
 import com.example.perseus.domain.user.entity.User;
+import com.example.perseus.domain.user.entity.type.UserRole;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,6 +15,15 @@ public class UserMapper {
             .age(user.getAge())
             .mbti(user.getMbti())
             .imageUrl(user.getImageUrl())
+            .build();
+  }
+
+  public User toUser(String email, String name, String imageUrl) {
+    return User.builder()
+            .email(email)
+            .name(name)
+            .imageUrl(imageUrl)
+            .role(UserRole.GUEST)
             .build();
   }
 }

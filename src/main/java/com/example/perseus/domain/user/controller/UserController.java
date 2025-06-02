@@ -3,7 +3,6 @@ package com.example.perseus.domain.user.controller;
 import com.example.perseus.domain.user.dto.request.AdditionalInfoRequest;
 import com.example.perseus.domain.user.dto.response.UserResponse;
 import com.example.perseus.domain.user.entity.User;
-import com.example.perseus.domain.user.facade.UserFacade;
 import com.example.perseus.domain.user.service.UserService;
 import com.example.perseus.global.annotation.CurrentUser;
 import com.example.perseus.global.dto.ResponseDto;
