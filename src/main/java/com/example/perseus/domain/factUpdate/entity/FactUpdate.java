@@ -23,7 +23,7 @@ public class FactUpdate {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long factUpdateId;
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name="writerId")
   private User writer;
   @ManyToOne
