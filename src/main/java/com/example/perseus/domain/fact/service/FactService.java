@@ -21,8 +21,10 @@ public class FactService {
   public FactResponse write(final FactRequest request, final User writer) {
     String content = request.content();
     Sentiment sentiment = request.sentiment();
+    Double latitude = request.latitude();
+    Double longitude = request.longitude();
 
-    Fact fact = factMapper.toFact(content, sentiment, writer);
+    Fact fact = factMapper.toFact(content, sentiment, writer, latitude, longitude);
     Fact createdFact = factRepository.save(fact);
 
     FactResponse factResponse = factMapper.toFactResponse(createdFact);

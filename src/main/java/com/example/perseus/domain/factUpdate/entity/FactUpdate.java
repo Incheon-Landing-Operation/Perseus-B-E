@@ -1,11 +1,11 @@
-package com.example.perseus.domain.fact.entity;
+package com.example.perseus.domain.factUpdate.entity;
 
-import com.example.perseus.domain.fact.entity.type.Sentiment;
+import com.example.perseus.domain.fact.entity.Fact;
+import com.example.perseus.domain.factUpdate.entity.type.CognitiveDistortion;
 import com.example.perseus.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -17,19 +17,19 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@Getter
-public class Fact {
+public class FactUpdate {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long factId;
+  private Long factUpdateId;
   @OneToOne
   @JoinColumn(name="writerId")
   private User writer;
-  private String content;
+  @ManyToOne
+  @JoinColumn(name="factId")
+  private Fact target;
   @Enumerated(EnumType.STRING)
-  private Sentiment sentiment;
-  private Double latitude;
-  private Double longitude;
+  private CognitiveDistortion cognitive_distortion;
+  private String content;
   @CreatedDate
   private LocalDateTime createdAt;
+
 }

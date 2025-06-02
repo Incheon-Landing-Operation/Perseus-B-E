@@ -1,9 +1,9 @@
 package com.example.perseus.domain.auth.service;
 
+import com.example.perseus.domain.auth.exception.NotFoundRefreshTokenException;
 import com.example.perseus.domain.auth.mapper.AuthMapper;
 import com.example.perseus.domain.auth.dto.response.TokenResponse;
 import com.example.perseus.domain.auth.entity.RefreshToken;
-import com.example.perseus.domain.auth.exception.NotFoundRefreshTokenException;
 import com.example.perseus.domain.auth.repository.RefreshTokenRepository;
 import com.example.perseus.domain.auth.dto.response.LoginResponse;
 import com.example.perseus.domain.user.entity.User;
@@ -15,7 +15,6 @@ import com.example.perseus.global.security.jwt.JwtProvider;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor

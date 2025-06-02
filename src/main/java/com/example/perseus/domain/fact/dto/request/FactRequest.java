@@ -4,6 +4,8 @@ import com.example.perseus.domain.fact.entity.type.Sentiment;
 
 public record FactRequest (
         String content,
-        Sentiment sentiment
+        Sentiment sentiment,
+        Double latitude,
+        Double longitude
 ) {
 }
