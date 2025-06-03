@@ -6,6 +6,7 @@ import com.example.perseus.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -16,11 +17,13 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 @EntityListeners(AuditingEntityListener.class)
 public class FactUpdate {
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long factUpdateId;
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name="writerId")
   private User writer;
   @ManyToOne

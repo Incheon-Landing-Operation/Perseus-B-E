@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class FactService {
@@ -42,4 +45,9 @@ public class FactService {
             .orElseThrow(NotFoundFactException::getInstance);
   }
 
+
+
+  public List<Fact> findByCreatedAtBefore(LocalDateTime threshold) {
+    return factRepository.findByCreatedAtBefore(threshold);
+  }
 }

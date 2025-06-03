@@ -22,7 +22,7 @@ public class Fact {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long factId;
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name="writerId")
   private User writer;
   private String content;
