@@ -32,4 +32,12 @@ public class FactUpdate {
   @CreatedDate
   private LocalDateTime createdAt;
 
+  public static FactUpdate of(User writer, Fact target, CognitiveDistortion cognitiveDistortion, String content) {
+    return FactUpdate.builder()
+            .writer(writer)
+            .cognitive_distortion(cognitiveDistortion)
+            .target(target)
+            .content(content)
+            .build();
+  }
 }

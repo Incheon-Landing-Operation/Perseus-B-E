@@ -32,4 +32,14 @@ public class Fact {
   private Double longitude;
   @CreatedDate
   private LocalDateTime createdAt;
+
+  public static Fact of(final String content, final User writer, final Sentiment sentiment, final Double latitude, final Double longitude) {
+    return Fact.builder()
+            .content(content)
+            .writer(writer)
+            .sentiment(sentiment)
+            .latitude(latitude)
+            .longitude(longitude)
+            .build();
+  }
 }

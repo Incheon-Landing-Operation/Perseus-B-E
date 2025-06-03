@@ -11,17 +11,11 @@ import java.time.LocalDateTime;
 @Component
 public class FactMapper {
 
-  public Fact toFact(final String content, final Sentiment sentiment, final User writer, final Double latitude, final Double longitude) {
-    return Fact.builder()
-            .content(content)
-            .writer(writer)
-            .sentiment(sentiment)
-            .latitude(latitude)
-            .longitude(longitude)
-            .build();
+  public Fact toFact(final String content, final String sentiment, final User writer, final Double latitude, final Double longitude) {
+    return Fact.of(content, writer, Sentiment.valueOf(sentiment), latitude, longitude);
   }
 
-  public FactResponse toFactResponse(Fact createdFact) {
+  public FactResponse toFactResponse(final Fact createdFact) {
     Long factId = createdFact.getFactId();
     User writer = createdFact.getWriter();
 

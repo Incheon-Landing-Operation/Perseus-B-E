@@ -1,9 +1,10 @@
 package com.example.perseus.domain.fact.service;
 
-import com.example.perseus.domain.fact.dto.request.FactRequest;
 import com.example.perseus.domain.fact.dto.response.FactResponse;
+import com.example.perseus.domain.fact.dto.request.FactRequest;
 import com.example.perseus.domain.fact.entity.Fact;
 import com.example.perseus.domain.fact.entity.type.Sentiment;
+import com.example.perseus.domain.fact.exception.NotFoundFactException;
 import com.example.perseus.domain.fact.mapper.FactMapper;
 import com.example.perseus.domain.fact.repository.FactRepository;
 import com.example.perseus.domain.user.entity.User;
@@ -20,7 +21,7 @@ public class FactService {
   @Transactional
   public FactResponse write(final FactRequest request, final User writer) {
     String content = request.content();
-    Sentiment sentiment = request.sentiment();
+    String sentiment = request.sentiment();
     Double latitude = request.latitude();
     Double longitude = request.longitude();
 
@@ -35,4 +36,10 @@ public class FactService {
   public void delete(Long factId) {
     factRepository.deleteById(factId);
   }
+
+  public Fact findById(Long factId) {
+    return factRepository.findById(factId)
+            .orElseThrow(NotFoundFactException::getInstance);
+  }
+
 }
