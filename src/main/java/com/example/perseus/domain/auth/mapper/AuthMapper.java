@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthMapper {
   public LoginResponse toLoginResponse(String accessToken, String refreshToken, UserRole role) {
-    return new LoginResponse(accessToken, refreshToken, role);
+    return new LoginResponse(accessToken, refreshToken, role.toString());
   }
 }

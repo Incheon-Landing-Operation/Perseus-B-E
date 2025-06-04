@@ -37,7 +37,7 @@ public class AuthController {
   public ResponseEntity<ResponseDto<LoginResponse.WithOutRefreshToken>> login(@Valid @RequestBody final LoginRequest loginRequest, final HttpServletResponse response) {
     HttpServletResponseUtil.setting(response, 200);
     LoginResponse loginResponse = authService.login(loginRequest.token());
-    response.addCookie(CookieUtil.makeCookie("refreshToken", loginResponse.RefreshToken()));
+    response.addCookie(CookieUtil.makeCookie("refreshToken", loginResponse.refreshToken()));
     ResponseDto<LoginResponse.WithOutRefreshToken> responseDto = ApiUtil.success(200, "로그인 성공", loginResponse.withoutRefreshToken());
     return ResponseEntity.ok(responseDto);
   }

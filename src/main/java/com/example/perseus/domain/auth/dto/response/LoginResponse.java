@@ -4,8 +4,8 @@ import com.example.perseus.domain.user.entity.type.UserRole;
 
 public record LoginResponse (
         String accessToken,
-        String RefreshToken,
-        UserRole role
+        String refreshToken,
+        String role
 ){
   public WithOutRefreshToken withoutRefreshToken() {
     return new WithOutRefreshToken(this.accessToken, this.role);
