@@ -13,7 +13,7 @@ public record LoginResponse (
 
   public record WithOutRefreshToken (
           String accessToken,
-          UserRole role
+          String role
   ) {
   }
 
