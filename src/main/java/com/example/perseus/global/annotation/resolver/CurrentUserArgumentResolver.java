@@ -1,4 +1,4 @@
-package com.example.perseus.global.resolver;
+package com.example.perseus.global.annotation.resolver;
 
 import com.example.perseus.domain.user.entity.User;
 import com.example.perseus.domain.user.facade.UserFacade;

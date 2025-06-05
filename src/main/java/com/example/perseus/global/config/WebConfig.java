@@ -1,6 +1,6 @@
 package com.example.perseus.global.config;
 
-import com.example.perseus.global.resolver.CurrentUserArgumentResolver;
+import com.example.perseus.global.annotation.resolver.CurrentUserArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
